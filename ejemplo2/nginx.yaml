@@ -1,0 +1,9 @@
+- name: Monstrando un mensaje
+  debug:
+    msg: "Hola, soy el rol nginx"
+- name: Instalando nginx
+  hosts: all
+  remote_user: ubuntu
+  become: yes
+  roles:
+    - nginx

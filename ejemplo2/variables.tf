@@ -1,5 +1,5 @@
 variable "aws_region" {
-  type = string
+  type    = string
   default = "us-east-1"
 }
 # variable "una_region" {}
@@ -9,5 +9,5 @@ variable "aws_region" {
 variable "reg2" {}
 variable "nombres_servicios" {
   description = "Nombre de los repositorios de EC2"
-  type = set(string)
+  type        = set(string)
 }
