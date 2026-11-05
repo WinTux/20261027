@@ -1,0 +1,13 @@
+- name: Mostrar saludo
+  debug:
+    msg: "Hola mundo desde una instancia"
+- name: Verificando que nginx esté en la versión más reciente
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+- name: Verificar que nginx esté ejecutandose
+  systemd:
+    state: started
+    name: nginx
+    enabled: yes
