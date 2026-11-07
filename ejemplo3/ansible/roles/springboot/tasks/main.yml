@@ -31,3 +31,11 @@
   template:
     src: springboot.service.j2
     dest: /etc/systemd/system/{{ service_name }}.service
+  notify:
+    - Reiniciar servicio Spring Boot
+
+- name: Iniciar y habilitar el servicio
+  systemd:
+    name: "{{ service_name }}"
+    state: started
+    enabled: yes
