@@ -8,5 +8,5 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/rusok/jenkins_home:/var/jenkins_home
-      - /home/rusok/Descargas/EjemploIaC/ejemplo3/proyecto:/var/jenkins_home/workspace/proyecto
+      - /home/rusok/Descargas/EjemploIaC/ejemplo4:/var/jenkins_home/workspace/proyecto
     restart: unless-stopped

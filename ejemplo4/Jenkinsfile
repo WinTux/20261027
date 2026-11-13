@@ -2,11 +2,12 @@ pipeline {
   agent any
   tools {
     terraform 'Terraform_1_16'
+    jdk 'jdk25'
   }
   environment {
     APP_NAME = "ProySpring"
     JAR_PATH = "ProySpring/target/${APP_NAME}.jar"
-    ANSIBLE_ROLE_PATH = "roles/springboot/files"
+    ANSIBLE_ROLE_PATH = "ansible/roles/springboot/files"
   }
   stages {
     stage('Checkout') {
@@ -59,6 +60,18 @@ pipeline {
         sh """
         ansible-playbook -i inventory ansible/main.yml
         """
+      }
+    }
+    stage('Terraform destroy') {
+      steps {
+        input message: "¿Quieres destruir la infraestructura?"
+        withCredentials([[
+          $class:'AmazonWebServicesCredentialsBinding',credentialsId:'aws-credentials'
+        ],file(credentialsId:'clasesdevops-pem',variable:'AWS_KEY_FILE')]) {
+          sh """
+          terraform destroy -auto-approve -var="ruta_private_key=${AWS_KEY_FILE}"
+          """
+        }
       }
     }
   }
